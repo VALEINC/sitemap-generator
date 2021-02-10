@@ -26,7 +26,7 @@ example
 
     import sys
     import logging
-    from pysitemap import crawler
+    from .. import pysitemap
 
     if __name__ == '__main__':
         if '--iocp' in sys.argv:

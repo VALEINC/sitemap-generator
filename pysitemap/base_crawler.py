@@ -90,7 +90,7 @@ class Crawler:
         self.busy.add(url)
 
         try:
-            resp = await self.session.get(url)  # await response
+            resp = await self.session.get(url, proxy="http://592594ba0d7d4110a6eba3e5e690eee2:@proxy.crawlera.com:8010/", verify_ssl=False)  # await response
         except Exception as exc:
             # on any exception mark url as BAD
             print('...', url, 'has error', repr(str(exc)))

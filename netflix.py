@@ -1,4 +1,6 @@
+#neflix.py
 import sys
+from datetime import date
 import logging
 from pysitemap import crawler
 
@@ -11,5 +13,8 @@ if __name__ == '__main__':
         events.set_event_loop(el)
 
     # root_url = sys.argv[1]
-    root_url = 'https://www.metpromstroi.ru'
-    crawler(root_url, out_file='sitemap.xml')
+    root_url = 'https://www.netflix.com/'
+    today = date.today()
+    d = today.strftime("%m.%d.%y")
+    crawler(root_url, out_file=f'../outputs/netflix{d}.txt', out_format='txt')
+             
