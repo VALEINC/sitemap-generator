@@ -16,10 +16,18 @@ if __name__ == '__main__':
         url_list.append(child[0].text)
     today=date.today()
     d=today.strftime("%m.%d.%y")
-    with open(f'outputs/peacocktvseries-{d}.txt', "w") as outfile:
-        for i in url_list:
-            series = i.split("/seasons/")[0]
-            outfile.write('%s\n' % series)
+    list_urls = []
+    for i in url_list:
+        series = i.split("/seasons/")[0]
+        if series not in list_urls:
+            list_urls.append(series)
+    print(list_urls)
+    '''list_final = []
+    for url in list_urls:
+        if url not in list_final:
+            list_final.append(url)'''
+#with open(f'outputs/peacocktvseries-{d}.txt', "w") as outfile:       
+#outfile.write('%s\n' % series)
 
 
 #Other xml sitemap pages
