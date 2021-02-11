@@ -4,26 +4,35 @@ from datetime import date
 import logging
 import requests
 import xml.etree.ElementTree as ET
-from .. import pysitemap
+from pysitemap import crawler
 
 if __name__ == '__main__':
-
+    #peacock movies sitemap
     url_list = []
-
-    tree = ET.parse('local_sitemaps/sitemap-1.xml')
+    response = requests.get('https://www.peacocktv.com/sitemap-content_page_movies-0.xml')
+    tree = ET.ElementTree(ET.fromstring(response.content))
     root = tree.getroot()
-
     for child in root:
         url_list.append(child[0].text)
-
     today=date.today()
     d=today.strftime("%m.%d.%y")
-    with open(f'../outputs/peacocktv1-{d}.txt', "w") as outfile:
+    with open(f'outputs/peacocktvmovies-{d}.txt', "w") as outfile:
         for i in url_list:
             outfile.write('%s\n' % i)
-# the url_list above creates all the urls of movies
     
-    url_list2 = []
+    #peacock series sitemap
+    url_list = []
+    response = requests.get('https://www.peacocktv.com/sitemap-content_page_movies-0.xml')
+    tree = ET.ElementTree(ET.fromstring(response.content))
+    root = tree.getroot()
+    for child in root:
+        url_list.append(child[0].text)
+    today=date.today()
+    d=today.strftime("%m.%d.%y")
+    with open(f'outputs/peacocktvmovies-{d}.txt', "w") as outfile:
+        for i in url_list:
+            outfile.write('%s\n' % i)
+    '''url_list2 = []
     tree2 = ET.parse('local_sitemaps/sitemap-2.xml')
     root2 = tree2.getroot()
 
@@ -32,11 +41,11 @@ if __name__ == '__main__':
 
     with open(f'../outputs/peacocktv2-{d}.txt', "w") as outfile:
         for i in url_list2:
-            outfile.write('%s\n' % i)
+            outfile.write('%s\n' % i)'''
         
 # the url_list above creates all the urls of tv
 
-### The mothod below works with most urls but there are always 3 urls raising errors 
+### The method below works with most urls but there are always 3 urls raising errors 
 # import sys
 # from datetime import date
 # import logging
