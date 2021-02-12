@@ -7,47 +7,49 @@ import xml.etree.ElementTree as ET
 from pysitemap import crawler
 
 if __name__ == '__main__':
-    #peacock movies sitemap
-    url_list = []
-    xml_list = ["https://www.peacocktv.com/sitemap-content_page_entertainment-0.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-1.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-2.xml", "https://www.peacocktv.com/sitemap-content_page_news-0.xml"]
-    num = 0
-    xml_map = xml_list[num]
-if num < len(api_list):
-                        num +=1
-                        continue
-                    else:
-                        break
-    response = requests.get('https://www.peacocktv.com/sitemap-content_page_entertainment-0.xml')
-    tree = ET.ElementTree(ET.fromstring(response.content))
-    root = tree.getroot()
-    for child in root:
-        full_link = child[0].text
-        series = full_link.split("/seasons/")[0]
-        if series not in url_list:
-            url_list.append(series)
-    print(url_list)
-    
-    '''response = requests.get('https://www.peacocktv.com/sitemap-content_page_entertainment-1.xml')
-    tree = ET.ElementTree(ET.fromstring(response.content))
-    root = tree.getroot()
-    for child in root:
-        url_list.append(child[0].text)
-    list_urls = []
-    for i in url_list:
-        series = i.split("/seasons/")[0]
-        if series not in list_urls:
-            list_urls.append(series)'''
-    
-    
-    #today=date.today()
-    #d=today.strftime("%m.%d.%y")
-    #with open(f'outputs/peacocktvseries-{d}.txt', "w") as outfile:       
-    #outfile.write('%s\n' % series)
-    #print(list_urls)
-    '''list_final = []
-    for url in list_urls:
-        if url not in list_final:
-            list_final.append(url)'''
+	#peacock movies sitemap
+	url_list = []
+	xml_list = ["https://www.peacocktv.com/sitemap-content_page_entertainment-0.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-1.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-2.xml", "https://www.peacocktv.com/sitemap-content_page_news-0.xml"]
+	num = 0
+	xml_map = xml_list[num]
+	while True:
+		try:
+			response = requests.get(xml_map)
+			tree = ET.ElementTree(ET.fromstring(response.content))
+			root = tree.getroot()
+			for child in root:
+				full_link = child[0].text
+				series = full_link.split("/seasons/")[0]
+				if series not in url_list:
+					url_list.append(series)
+			print("this keeps hitting, please quit out of meeeeeee")
+			if num < len(api_list):
+				num +=1
+				continue
+			else:
+				print(url_list)
+				break
+'''response = requests.get('https://www.peacocktv.com/sitemap-content_page_entertainment-1.xml')
+tree = ET.ElementTree(ET.fromstring(response.content))
+root = tree.getroot()
+for child in root:
+	url_list.append(child[0].text)
+list_urls = []
+for i in url_list:
+	series = i.split("/seasons/")[0]
+	if series not in list_urls:
+		list_urls.append(series)'''
+
+
+#today=date.today()
+#d=today.strftime("%m.%d.%y")
+#with open(f'outputs/peacocktvseries-{d}.txt', "w") as outfile:       
+#outfile.write('%s\n' % series)
+#print(list_urls)
+'''list_final = []
+for url in list_urls:
+	if url not in list_final:
+		list_final.append(url)'''
 
 
 
