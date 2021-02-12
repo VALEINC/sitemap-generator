@@ -7,21 +7,38 @@ import xml.etree.ElementTree as ET
 from pysitemap import crawler
 
 if __name__ == '__main__':
-    #peacock movies sitemap
-    url_list = []
-    response = requests.get('https://www.peacocktv.com/sitemap-content_page_movies-0.xml')
-    tree = ET.ElementTree(ET.fromstring(response.content))
-    root = tree.getroot()
-    for child in root:
-        url_list.append(child[0].text)
-    today=date.today()
-    d=today.strftime("%m.%d.%y")
-    with open(f'outputs/peacocktvmovies-{d}.txt', "w") as outfile:
-        for i in url_list:
-            outfile.write('%s\n' % i)
-    
-#Other xml sitemap pages
-["https://www.peacocktv.com/sitemap-content_page_entertainment-0.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-1.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-2.xml", "https://www.peacocktv.com/sitemap-content_page_news-0.xml"]
+	#peacock movies sitemap
+	url_list = []
+	xml_list = ["https://www.peacocktv.com/sitemap-content_page_movies-0.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-0.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-1.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-2.xml", "https://www.peacocktv.com/sitemap-content_page_news-0.xml"]
+	print(len(xml_list))
+	num = 0
+	xml_map = xml_list[num]
+	while True:
+		try:
+			xml_map = xml_list[num]
+			response = requests.get(xml_map)
+			tree = ET.ElementTree(ET.fromstring(response.content))
+			root = tree.getroot()
+			for child in root:
+				full_link = child[0].text
+				if ("/seasons/") in full_link:
+					pass
+				elif ("/watch-online/") in full_link:
+					url_list.append(full_link)
+				else:
+					pass
+			num +=1
+			if num < len(xml_list):
+				continue
+			else:
+				today=date.today()
+				d=today.strftime("%m.%d.%y")
+				with open(f'outputs/peacocktv-{d}.txt', "w") as outfile:       
+					outfile.write('%s\n' % url_list)
+				break
+		except:
+			break
+
 
 
 ### The method below works with most urls but there are always 3 urls raising errors 
