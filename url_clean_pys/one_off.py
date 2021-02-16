@@ -29,6 +29,19 @@ def hbomax_clean(url):
         pass
     
 def hulu_clean(url):
+    #code written to reflect sitemap links vs non-sitemap links
+    if ('/movie/' in url) or ('/series/' in 'url'):
+        if "?lp_referrer=sitemappage" in url:
+            url.strip("?lp_referrer=sitemappage")
+                if "https://www.hulu.com" in url:
+                    return url
+                else:
+                    new_url = ("https://www.hulu.com" + url
+                    return new_url
+        else:
+            return url
+    else:
+        pass
 
 def netflix_clean(url):
     if "https://www.netflix.com/title/" in url:
@@ -36,10 +49,10 @@ def netflix_clean(url):
     elif "%3A%2F%2F" in url:
         newurl = url.replace("https://www.netflix.com/login?nextpage=", "").replace("%3A", ":").replace("%2F", "/")
         return newurl
-        #code to strip country code?
+        # additional code to strip country in url?
     else:
         pass
-    
+
 def peacock_clean(url):
 	if ("/seasons/" in url) or ("/watch-online/") in url):
 		return url
