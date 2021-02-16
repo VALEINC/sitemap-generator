@@ -10,7 +10,6 @@ if __name__ == '__main__':
 	#peacock movies sitemap
 	url_list = []
 	xml_list = ["https://www.peacocktv.com/sitemap-content_page_movies-0.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-0.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-1.xml", "https://www.peacocktv.com/sitemap-content_page_entertainment-2.xml", "https://www.peacocktv.com/sitemap-content_page_news-0.xml"]
-	print(len(xml_list))
 	num = 0
 	xml_map = xml_list[num]
 	while True:
@@ -33,7 +32,7 @@ if __name__ == '__main__':
 			else:
 				today=date.today()
 				d=today.strftime("%m.%d.%y")
-				with open(f'outputs/peacocktv-{d}.txt', "w") as outfile:       
+				with open(f'outputs/peacocktv-{d}.txt', "w") as outfile:    
 					outfile.write('%s\n' % url_list)
 				break
 		except:
