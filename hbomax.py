@@ -2,7 +2,7 @@
 import sys
 from datetime import date
 import logging
-from .. import pysitemap
+from pysitemap import crawler
 
 if __name__ == '__main__':
     if '--iocp' in sys.argv:
