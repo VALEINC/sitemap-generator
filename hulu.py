@@ -6,33 +6,26 @@ from datetime import date
 url_list = []
 sitemap_list = ["https://www.hulu.com/sitemap/movies", "https://www.hulu.com/sitemap/series"]
 num = 0
-while True:
-	try:
-		all_hulu = sitemap_list[num]
-		response = requests.get(all_hulu)
-		soup = BeautifulSoup(response.content, "html.parser")
-		for link in soup.findAll('a'):
-			if link.get('href') == None:
-				pass
-			elif ('/movie/' in link.get('href')) or ('/series/' in link.get('href')):
-				new_link = ("https://www.hulu.com" + (link.get('href'))).strip("?lp_referrer=sitemappage")
-				url_list.append(new_link)
-			else:
-				pass
-		num +=1
-		print(num)
-		if num < len(sitemap_list):
+today=date.today()
+d=today.strftime("%m.%d.%y")
+with open(f'outputs/hulu{d}.txt', "w") as outfile:
+	while num < len(sitemap_list):
+		try:
+			all_hulu = sitemap_list[num]
+			response = requests.get(all_hulu)
+			soup = BeautifulSoup(response.content, "html.parser")
+			for link in soup.findAll('a'):
+				if link.get('href') == None:
+					pass
+				elif ('/movie/' in link.get('href')) or ('/series/' in link.get('href')):
+					new_link = ("https://www.hulu.com" + (link.get('href'))).strip("?lp_referrer=sitemappage")
+					outfile.write('%s\n' % new_link)
+				else:
+					pass
+			num +=1
 			continue
-		else:
-			print("here, at least")
-			today=date.today()
-			d=today.strftime("%m.%d.%y")
-			with open(f'outputs/hulu{d}.txt', "w") as outfile:
-				outfile.write('%s\n' % url_list)
+		except:
 			break
-	except:
-		print("broken")
-		break
 
 
 '''for link in soup.findAll('a'):
