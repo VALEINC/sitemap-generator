@@ -6,13 +6,13 @@ def appletv_clean(url):
         else:
             return url
     else:
-        pass
+        return None
 
 def dazn_clean(url):
     if ("competitor" in url) or ("sport"  in url) or ("schedule" in url):
-        pass
+        return None
     elif 'https://www.dazn.com/en-US/home' == url:
-        pass
+        return None
     else:
         return url
 
@@ -20,13 +20,13 @@ def disneyplus_clean(url):
     if ("https://www.disneyplus.com/movies/" in url) or ("https://www.disneyplus.com/series/" in url):
 		return url
 	else:
-		pass
+		return None
 
 def hbomax_clean(url):
-    if ("https://www.hbomax.com/feature/urn" in url) or ("https://www.hbomax.com/series/urn" in url:):
+    if ("https://www.hbomax.com/feature/urn" in url) or ("https://www.hbomax.com/series/urn" in url):
         return url
     else:
-        pass
+        return None
     
 def hulu_clean(url):
     #code written to reflect sitemap links vs non-sitemap links
@@ -41,7 +41,7 @@ def hulu_clean(url):
         else:
             return url
     else:
-        pass
+        return None
 
 def netflix_clean(url):
     if "https://www.netflix.com/title/" in url:
@@ -51,10 +51,12 @@ def netflix_clean(url):
         return newurl
         # additional code to strip country in url?
     else:
-        pass
+        return None
 
 def peacock_clean(url):
-	if ("/seasons/" in url) or ("/watch-online/") in url):
+	if "/seasons/" in url:
+        return None
+    elif "/watch-online/" in url:
 		return url
     else:
-        pass
+        return None
