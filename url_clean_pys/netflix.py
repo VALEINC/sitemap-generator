@@ -4,13 +4,20 @@ good_urls = []
 
 for url in txtfile:
     if "https://www.netflix.com/title/" in url:
-        good_urls.append(url)
+        if url in good_urls:
+            pass
+        else:
+            good_urls.append(url)
     elif "%3A%2F%2F" in url:
         newurl = url.replace("https://www.netflix.com/login?nextpage=", "").replace("%3A", ":").replace("%2F", "/")
-        good_urls.append(newurl)
+            if newurl in good_urls:
+                pass
+            else:
+                good_urls.append(newurl)
     else:
         pass
 
+#need to check for 
 #write urls to new outfile
 
 
