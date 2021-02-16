@@ -1,21 +1,38 @@
+#hulu
 from bs4 import BeautifulSoup
 import requests
 from datetime import date
 
-response = requests.get("https://www.hulu.com/sitemap/movies")
-#print(response.content)
-soup = BeautifulSoup(response.content, "html.parser")
-today=date.today()
-d=today.strftime("%m.%d.%y")
-with open(f'outputs/hulumovies{d}.txt', "w") as outfile:
-	for link in soup.findAll('a'):
-		if link.get('href') == None:
-			pass
-		elif '/movie/' in link.get('href'):
-			new_link = ("https://www.hulu.com" + (link.get('href'))).strip("?lp_referrer=sitemappage")
-			outfile.write('%s\n' % new_link)
+url_list = []
+sitemap_list = ["https://www.hulu.com/sitemap/movies", "https://www.hulu.com/sitemap/series"]
+num = 0
+while True:
+	try:
+		all_hulu = sitemap_list[num]
+		response = requests.get(all_hulu)
+		soup = BeautifulSoup(response.content, "html.parser")
+		for link in soup.findAll('a'):
+			if link.get('href') == None:
+				pass
+			elif ('/movie/' in link.get('href')) or ('/series/' in link.get('href')):
+				new_link = ("https://www.hulu.com" + (link.get('href'))).strip("?lp_referrer=sitemappage")
+				url_list.append(new_link)
+			else:
+				pass
+		num +=1
+		print(num)
+		if num < len(sitemap_list):
+			continue
 		else:
-			pass
+			print("here, at least")
+			today=date.today()
+			d=today.strftime("%m.%d.%y")
+			with open(f'outputs/hulu{d}.txt', "w") as outfile:
+				outfile.write('%s\n' % url_list)
+			break
+	except:
+		print("broken")
+		break
 
 
 '''for link in soup.findAll('a'):
