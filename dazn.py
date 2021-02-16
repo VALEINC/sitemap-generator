@@ -20,7 +20,6 @@ if __name__ == '__main__':
             if ("competitor" in i) or ("sport"  in i) or ("schedule" in i):
                 pass
             elif 'https://www.dazn.com/en-US/home' == i:
-                print('here')
                 pass
             else:
                 outfile.write('%s\n' % i)
@@ -28,3 +27,19 @@ if __name__ == '__main__':
 
 
 # clean based on assumption that we don't want these types of urls ('https://www.dazn.com/en-US/competitor/Competitor:ipenlq6r1ae65q69twfd6ukr', 'https://www.dazn.com/en-US/sport/Sport:25z21evc6o0aewxnhyu2dzyrc', 'https://www.dazn.com/en-US/schedule')
+
+'''BUCKET_NAME = 'tsguide'
+
+            s3c = boto3.client(
+                's3',
+                region_name='us-east-1',
+                aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
+            )
+
+            response = s3c.put_object(
+                Body=photo,
+                Bucket=BUCKET_NAME,
+                ContentType='image/jpeg',
+                Key=f"images/users/{user.profile_picture_uid+connector+str(user.id)}.jpg"
+            )'''

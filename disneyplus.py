@@ -5,6 +5,7 @@ import logging
 import requests
 import xml.etree.ElementTree as ET
 from pysitemap import crawler
+
 if __name__ == '__main__':
 	url_list = []
 	response = requests.get('https://cde-lumiere-disneyplus.bamgrid.com/d-sitemap-1.xml')
