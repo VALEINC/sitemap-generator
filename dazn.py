@@ -17,12 +17,11 @@ if __name__ == '__main__':
     d=today.strftime("%m.%d.%y")
     with open(f'outputs/dazn{d}.txt', "w") as outfile:
         for i in url_list:
-            if ("competitor" in i) or ("sport"  in i) or ("schedule" in i):
-                pass
-            elif 'https://www.dazn.com/en-US/home' == i:
-                pass
-            else:
+            if ("competition" in i) or ("/home/" in i) or ("ArticleId" in i):
                 outfile.write('%s\n' % i)
+            else:
+                pass
+
 
 
 
