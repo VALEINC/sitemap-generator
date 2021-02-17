@@ -9,12 +9,10 @@ def appletv_clean(url):
         return None
 
 def dazn_clean(url):
-    if ("competitor" in url) or ("sport"  in url) or ("schedule" in url):
-        return None
-    elif 'https://www.dazn.com/en-US/home' == url:
-        return None
-    else:
+    if ("ArticleId" in url) or ("competition" in url) or ("/home/"  in url):
         return url
+    else:
+        print(url)
 
 def disneyplus_clean(url):
     if ("https://www.disneyplus.com/movies/" in url) or ("https://www.disneyplus.com/series/" in url):
