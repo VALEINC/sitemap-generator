@@ -1,10 +1,6 @@
 #dazn
-import sys
-from datetime import date
-import logging
 import requests
 import xml.etree.ElementTree as ET
-from pysitemap import crawler
 
 dazn_unclean_urls = []
 response = requests.get('https://www.dazn.com/en-US/sitemap.xml')
