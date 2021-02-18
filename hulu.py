@@ -1,20 +1,24 @@
-#neflix.py
-import sys
+#hulu
+from bs4 import BeautifulSoup
+import requests
 from datetime import date
-import logging
-from .. import pysitemap
+
+def hulu_sitemap():
+	hulu_urls = []
+	sitemap_list = ["https://www.hulu.com/sitemap/movies", "https://www.hulu.com/sitemap/series"]
+	num = 0
+	while num < len(sitemap_list):
+		all_hulu = sitemap_list[num]
+		response = requests.get(all_hulu)
+		soup = BeautifulSoup(response.content, "html.parser")
+		for link in soup.findAll('a'):
+			if link.get('href') == None:
+				pass
+			else:
+				hulu_urls.append(link.get('href'))
+		num +=1
+		continue
+	return hulu_urls 
 
 if __name__ == '__main__':
-    if '--iocp' in sys.argv:
-        from asyncio import events, windows_events
-        sys.argv.remove('--iocp')
-        logging.info('using iocp')
-        el = windows_events.ProactorEventLoop()
-        events.set_event_loop(el)
-
-    # root_url = sys.argv[1]
-    root_url = 'https://www.hulu.com/'
-    today = date.today()
-    d = today.strftime("%m.%d.%y")
-    crawler(root_url, out_file=f'../outputs/hulu{d}.txt', out_format='txt')
-             
+	hulu_sitemap()

@@ -50,7 +50,9 @@ class Crawler:
 
         await t
         await self.session.close()
-        await self.writer.write([key for key, value in self.done.items() if value])
+        return [key for key, value in self.done.items() if value]
+        # deactivate writer capabilities
+        # await self.writer.write([key for key, value in self.done.items() if value])
 
     async def addurls(self, urls):
         """
