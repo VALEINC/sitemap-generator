@@ -25,3 +25,4 @@ def crawler(root_url, out_file, out_format='xml', maxtasks=100):
     print('busy:', len(c.busy))
     print('done:', len(c.done), '; ok:', sum(c.done.values()))
     print('tasks:', len(c.tasks))
+    return [key for key, value in c.done.items() if value]
