@@ -28,7 +28,7 @@ def hbomax_clean(url):
     
 def hulu_clean(url):
     #code written to reflect sitemap links vs non-sitemap links
-    if ('/movie/' in url) or ('/series/' in 'url'):
+    if ('/movie/' in url) or ('/series/' in url):
         if "?lp_referrer=sitemappage" in url:
             url.strip("?lp_referrer=sitemappage")
         if "https://www.hulu.com" in url:
